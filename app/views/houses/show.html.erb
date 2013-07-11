@@ -1,0 +1,66 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @house.name %>
+</p>
+
+
+
+<p>
+  <b>House Type:</b>
+  <%= @house.house_type %>
+</p>
+
+<br>
+<br>
+<br>
+<table id= "roster">
+	<th>House Roster</th>
+	<tr>
+
+		<th>Name</th>
+		<th>Email</th>
+		<th>Gender</th>
+	</tr>
+	<% @house.students.each do |student| %>
+	<tr>
+		<td><%= student.name%></td>
+		<td><%= student.email%></td>
+		<td><%= student.gender%></td>
+		<td><%= link_to 'View Person', student_path(student) %></td>
+	</tr>
+	<% end %>
+</table>
+<br>
+<br>
+<table id="events">
+	<th>Event Information</th>
+	
+	<%= calendar @house.events do |event| %>
+  <div> <%=link_to event.name, event %></div>
+  <div><%= event.start_time%></div>
+<% end %>
+	</table>
+	
+	<%= form_for Event.new, :remote => true do|f| %>
+		<%=f.label :name, "Name" %><br />
+		<%=f.text_field :name %><br />
+		<%=f.label :location, "Location" %><br />
+		<%=f.text_field :location %><br />
+		<%=f.label :description, "Description" %><br />
+		<%=f.text_field :description%><br />
+		<%=f.label :start_time, "Date Time"%><br />
+		<%=f.datetime_select :start_time %><br />
+		<%=f.label :event_type, "Type" %><br />
+		<%=f.select :event_type, ["Pregame", "Exchange", "Philanthropy"]%><br />
+		<%= f.hidden_field :house_id, :value => @house.id %><br />
+		<br>
+		<%= f.submit "Add Event" %>
+	<%end%>
+	<br>		
+	<br>
+	<br>
+	
+
+<%= link_to 'Back', houses_path %>

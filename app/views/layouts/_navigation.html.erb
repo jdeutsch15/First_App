@@ -1,0 +1,21 @@
+
+<ul class="nav">
+  <% if student_signed_in? %>
+    <li>
+    <%= link_to 'Logout', destroy_student_session_path, :method=>'delete' %>
+    </li>
+  <% else %>
+    <li>
+    <%= link_to 'Login', new_student_session_path %>
+    </li>
+  <% end %>
+  <% if student_signed_in? %>
+    <li>
+    <%= link_to 'Edit account', edit_student_registration_path %>
+    </li>
+  <% else %>
+    <li>
+    <%= link_to 'Sign up', new_student_registration_path %>
+    </li>
+  <% end %>
+</ul>

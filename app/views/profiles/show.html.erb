@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Interests:</b>
+  <%= @profile.interests %>
+</p>
+
+<p>
+  <b>Relationship status:</b>
+  <%= @profile.relationship_status %>
+</p>
+
+<p>
+  <b>Birthday:</b>
+  <%= @profile.birthday %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @profile.phone %>
+</p>
+
+<p>
+  <b>Person:</b>
+  <%= @profile.person_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<%= link_to 'Back', profiles_path %>

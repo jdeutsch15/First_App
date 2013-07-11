@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FirstApp</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application.js" %>
+  <%= csrf_meta_tags %>
+</head>
+
+  <body class="<%= controller_name %> <%= action_name %>">
+    <div id="container" class="container">
+      <header>
+        <%= render 'layouts/navigation' %>
+        <%= render 'layouts/messages' %>
+      </header>
+      <div id="main" role="main">
+        <%= yield %>
+      </div>
+      <footer>
+      </footer>
+    </div> <!--! end of #container -->
+  </body>
+</html>
