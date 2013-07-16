@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130710204358) do
+ActiveRecord::Schema.define(:version => 20130715164553) do
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -29,13 +29,6 @@ ActiveRecord::Schema.define(:version => 20130710204358) do
     t.integer "house_id"
   end
 
-  create_table "fraternities", :force => true do |t|
-    t.string   "name"
-    t.string   "location"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "houses", :force => true do |t|
     t.string   "name"
     t.string   "location"
@@ -44,26 +37,14 @@ ActiveRecord::Schema.define(:version => 20130710204358) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "people", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.string   "name"
-    t.string   "gender"
-    t.integer  "house_id"
+  create_table "messages", :force => true do |t|
+    t.string   "content"
+    t.integer  "student_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "people", ["email"], :name => "index_people_on_email", :unique => true
-  add_index "people", ["reset_password_token"], :name => "index_people_on_reset_password_token", :unique => true
+  add_index "messages", ["student_id", "created_at"], :name => "index_messages_on_student_id_and_created_at"
 
   create_table "profiles", :force => true do |t|
     t.string   "interests"
@@ -85,13 +66,6 @@ ActiveRecord::Schema.define(:version => 20130710204358) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
-
-  create_table "sororities", :force => true do |t|
-    t.string   "name"
-    t.string   "location"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "students", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -121,23 +95,5 @@ ActiveRecord::Schema.define(:version => 20130710204358) do
   end
 
   add_index "students_roles", ["student_id", "role_id"], :name => "index_students_roles_on_student_id_and_role_id"
-
-  create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-  end
-
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

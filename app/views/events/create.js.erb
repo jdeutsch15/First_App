@@ -1,1 +1,1 @@
-$("#events").append("<tr><td><%=@event.name%></td><td><%=@event.location%></td><td><%=@event.description%></td><td><%=@event.event_type%></td><td><%=@event.start_time%></td><td><%= escape_javascript link_to('View Event', event_path(@event)) %></td><td><%= escape_javascript link_to('Edit Event', edit_event_path(@event)) %></td><td><%=escape_javascript link_to('Delete Event', @event, method: :delete, data: {confirm: 'Are You Sure?' })%></td></tr>")
+$("#events").append("Please Refresh To Update Calendar!")

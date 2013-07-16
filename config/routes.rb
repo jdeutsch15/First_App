@@ -14,6 +14,8 @@ resources :students
 resources :houses
 resources :profiles
 resources :events
+resources :messages
+resources :message_boards
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

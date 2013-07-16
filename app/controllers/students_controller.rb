@@ -11,7 +11,10 @@ class StudentsController < ApplicationController
 
 end
   def show
+
   	@student=Student.find(params[:id])
+  	@messages=@student.messages.paginate(page: params[:page])
+  	
   	respond_to do |format|
   		format.html
   		format.json {render json: @student}

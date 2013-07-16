@@ -1,0 +1,7 @@
+<h3>Message</h3>
+<p><b>Content:</b> <%= @message.content %></p>
+<p><b>Posted by:</b> <%= @message.student.name %></p>
+<p><b>Posted at:</b> <%= @message.created_at %></p>
+<p><%= link_to @message.student.name, @message.student%></p>
+<p><%= link_to @message.student.house.name, @message.student.house%></p>
+<p><%= link_to "message board", messages_path %></p>

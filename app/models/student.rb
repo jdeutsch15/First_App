@@ -8,6 +8,7 @@ class Student < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 has_one :profile
 belongs_to :house
+has_many :messages, dependent: :destroy
  
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :gender, :email, :password, :password_confirmation, :remember_me, :house_id
@@ -24,4 +25,8 @@ end
 def default_role
   self.roles << Role.where(:name => 'Student').first
 end
+def feed
+  Message.where("student_id = ?", id)
+end
+
 end

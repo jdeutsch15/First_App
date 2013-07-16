@@ -3,8 +3,9 @@
 <p><b>Email:</b> <%= @student.email%></p>
 <p><b>Gender:</b> <%= @student.gender %></p>
 <p><b>House:</b> <%= link_to @student.house.name, @student.house %></p>
+	<p><b>Events:</b></p>
 	<% @student.house.events.each do |event| %>
-	<p><b>Event:</b><%= link_to event.name, event%></p>
+	<p><%= link_to event.name, event%></p>
 	<%end%>
 <br>
 <br>
@@ -26,12 +27,26 @@
 		<td><%= @student.profile.relationship_status %></td>
 		
 	</tr>
+	<% else %>
+		<tr>
+			<td><input type ="button" value = "update" onclick="var e = document.createElement('input'); e.type= 'text';"></td>
 	<% end %>
 	
 </table>
 <br>
+<br>
+<br>
+<div class="student messages">
+	<%if @student.messages.any? %>
+	<h3>Messages (<%= @student.messages.count%>) </h3>
+	<ol class="messages">
+		<%= render @messages %>
+	</ol>
+	<%=will_paginate @messages %>
+	<%end%>
+</div>
 
-
+<p><%= link_to "message board", messages_path %></p>
 
 
 <%= link_to 'Edit', edit_student_path(@student) %>
