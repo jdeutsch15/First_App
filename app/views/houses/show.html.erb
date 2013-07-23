@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+  <p id="notice"><%= notice %></p>
 
 <p>
   <b>Name:</b>
@@ -15,22 +15,155 @@
 <br>
 <br>
 <br>
-<table id= "roster">
-	<th>House Roster</th>
+<p><b><%=@house.name%> Roster</b></p>
+<div id ="accordion">
+	<h3>2013</h3>
+	<div>
+	<table id= "roster">
 	<tr>
 
 		<th>Name</th>
 		<th>Email</th>
 		<th>Gender</th>
+		<th>Pledge Class</th>
 	</tr>
+	
 	<% @house.students.each do |student| %>
+	<% if student.pledge_class=="2013" then %>
 	<tr>
 		<td><%= student.name%></td>
 		<td><%= student.email%></td>
 		<td><%= student.gender%></td>
+		<td><%= student.pledge_class%></td>
+		<td><%= link_to 'View Person', student_path(student) %></td>
+	</tr>
+	<%end%>
+	<% end %>
+</table>
+</div>
+<h3>2014</h3>
+<div>
+	<table id= "roster">
+	
+	<tr>
+
+		<th>Name</th>
+		<th>Email</th>
+		<th>Gender</th>
+		<th>Pledge Class</th>
+	</tr>
+	<% @house.students.each do |student| %>
+	<% if student.pledge_class=="2014" then %>
+	<tr>
+		<td><%= student.name%></td>
+		<td><%= student.email%></td>
+		<td><%= student.gender%></td>
+		<td><%= student.pledge_class%></td>
 		<td><%= link_to 'View Person', student_path(student) %></td>
 	</tr>
 	<% end %>
+	<% end %>
+</table>
+</div>
+<h3>2015</h3>
+<div>
+	<table id= "roster">
+	
+	<tr>
+
+		<th>Name</th>
+		<th>Email</th>
+		<th>Gender</th>
+		<th>Pledge Class</th>
+	</tr>
+	<% @house.students.each do |student| %>
+	<% if student.pledge_class=="2015" then %>
+	<tr>
+		<td><%= student.name%></td>
+		<td><%= student.email%></td>
+		<td><%= student.gender%></td>
+		<td><%= student.pledge_class%></td>
+		<td><%= link_to 'View Person', student_path(student) %></td>
+	</tr>
+	<% end %>
+	<% end %>
+</table>
+</div>
+<h3>2016</h3>
+<div>
+	<table id= "roster">
+	
+	<tr>
+
+		<th>Name</th>
+		<th>Email</th>
+		<th>Gender</th>
+		<th>Pledge Class</th>
+	</tr>
+	<% @house.students.each do |student| %>
+	<% if student.pledge_class=="2016" then %>
+	<tr>
+		<td><%= student.name%></td>
+		<td><%= student.email%></td>
+		<td><%= student.gender%></td>
+		<td><%= student.pledge_class%></td>
+		<td><%= link_to 'View Person', student_path(student) %></td>
+	</tr>
+	<% end %>
+	<% end %>
+</table>
+</div>
+<h3>2017</h3>
+<div>
+	<table id= "roster">
+	
+	<tr>
+
+		<th>Name</th>
+		<th>Email</th>
+		<th>Gender</th>
+		<th>Pledge Class</th>
+	</tr>
+	<% @house.students.each do |student| %>
+	<% if student.pledge_class=="2017" then %>
+	<tr>
+		<td><%= student.name%></td>
+		<td><%= student.email%></td>
+		<td><%= student.gender%></td>
+		<td><%= student.pledge_class%></td>
+		<td><%= link_to 'View Person', student_path(student) %></td>
+	</tr>
+	<% end %>
+	<% end %>
+</table>
+</div>
+</div>
+<br />
+
+<table id= "invitations">
+	<% if current_student.house==@house then %>
+	<th>Pending Invitations</th>
+	<tr>
+
+		<th>Event</th>
+		<th>Response</th>
+	</tr>
+	<% @house.invitations.each do |invitation| %>
+	<tr>
+		<td><%= link_to invitation.event.name, invitation.event%></td>
+		<td><%= invitation.response%></td>
+		
+		<td><%= link_to 'View Invitation', invitation_path(invitation) %></td>
+		<%if current_student.role == "social_chair" then %>
+		<td><%= form_for invitation, :remote => true do |f|%>
+			<%= f.label :response, "Response"%><br/>
+			<%=f.select :response, ["Yes", "No"]%>
+			<%=f.submit "Respond to invite"%>
+			<%end%><%end%></td>
+	</tr>
+	
+	<% end %>
+	<%end%>
 </table>
 <br>
 <br>
@@ -42,14 +175,15 @@
   <div><%= event.start_time%></div>
 <% end %>
 	</table>
-	
+	<% if current_student.house==@house then %>
+	<% if current_student.role=="social_chair" then%>
 	<%= form_for Event.new, :remote => true do|f| %>
 		<%=f.label :name, "Name" %><br />
-		<%=f.text_field :name %><br />
+		<%=f.text_field :name, :id => "name" %><br />
 		<%=f.label :location, "Location" %><br />
-		<%=f.text_field :location %><br />
+		<%=f.text_field :location, :id => "location" %><br />
 		<%=f.label :description, "Description" %><br />
-		<%=f.text_field :description%><br />
+		<%=f.text_field :description, :id => "description"%><br />
 		<%=f.label :start_time, "Date Time"%><br />
 		<%=f.datetime_select :start_time %><br />
 		<%=f.label :event_type, "Type" %><br />
@@ -58,9 +192,19 @@
 		<br>
 		<%= f.submit "Add Event" %>
 	<%end%>
+	<%end%>
+	<%end%>
+	<div id="javascript">
+	</div>
 	<br>		
 	<br>
 	<br>
-	
+	<p><%= link_to "message board", messages_path %></p>
+	<%= link_to 'Back', houses_path %>
 
-<%= link_to 'Back', houses_path %>
+<script>
+  $(function() {
+    $( "#accordion" ).accordion();
+  });
+  </script>
+

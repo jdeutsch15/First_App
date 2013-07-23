@@ -9,7 +9,6 @@ puts 'CREATING ROLES'
 Role.create([
   { :name => 'admin' }, 
   { :name => 'Student' }, 
-  { :name => 'VIP' },
   { :name => 'Social Chair'}
 ], :without_protection => true)
 puts 'SETTING UP DEFAULT Student LOGIN'

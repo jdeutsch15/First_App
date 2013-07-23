@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+   before_filter :authenticate_student!
    def index
     
     @messages=Message.all
@@ -51,7 +52,7 @@ end
 def destroy 
 	@message=Message.find(params[:id])
 	@message.destroy
-	redirect_to :back
+	redirect_to messages_path
 	end
 
 end

@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
-	 def index
+	 before_filter :authenticate_student!
+   before_filter :only_allow_social_chair, :only => [:create]
+   def index
     @events = Event.all
 
     respond_to do |format|
@@ -42,6 +44,7 @@ class EventsController < ApplicationController
     @event = Event.new(params[:event])
     logger.info "house id is #{params[:event][:house_id].inspect}"
     @event.houses << House.find(params[:event][:house_id])
+    @event.host_id=@event.house_id
     @event.save!
   	
     respond_to do |format|
@@ -84,6 +87,9 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+private 
+def only_allow_social_chair
+  redirect_to root_path, :alert => 'Not authorized as a social chair.' unless current_student.has_role? :social_chair
+end
 
 end

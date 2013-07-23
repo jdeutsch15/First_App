@@ -16,6 +16,15 @@ resources :profiles
 resources :events
 resources :messages
 resources :message_boards
+resources :invitations do
+  member do
+    get 'attending'
+    post 'attending'
+    get 'not_attending'
+    post 'not_attending'
+  end
+end
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -8,8 +8,13 @@
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>
 
+<div><%= f.label :pledge_class %><br />
+  <%= f.select :pledge_class, ["2013", "2014", "2015", "2016", "2017"] %></div>
+
     <div><%= f.label :gender %><br />
   <%= f.select :gender, ["male", "female"] %></div>
+  <div><%= f.label :role %><br />
+  <div><%= f.collection_select :role, Student::ROLES, :to_s, :humanize %></div>
 
   <div><%= f.label :house_id, "House" %><br />
     <%= f.select :house_id, options_from_collection_for_select(House.all, :id, :name) %></div>

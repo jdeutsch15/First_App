@@ -1,6 +1,7 @@
 class HousesController < ApplicationController
  # GET /houses
   # GET /houses.json
+before_filter :authenticate_student!
   def index
     @houses = House.all
 
@@ -14,10 +15,10 @@ class HousesController < ApplicationController
   # GET /houses/1.json
   def show
     @house = House.find(params[:id])
-
+    
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @house }
+      format.js
     end
   end
 

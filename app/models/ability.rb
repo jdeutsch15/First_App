@@ -3,12 +3,26 @@ class Ability
 
   def initialize(student)
     student ||= Student.new # guest user (not logged in)
-    if student.has_role? :admin
+    if student.admin?
       can :manage, :all
-  else
-    can :read, :all
+    elsif student.social_chair?
+        can :manage, :event, :host_id=>student.house_id
+    elsif student.student?
+        can :read, :all
     end
   end
+
+  def current_ability
+    @current_ability ||= case
+                            when current_student
+                                UserAbility.new(current_student)
+                            when current_admin
+                                AdminAbility.new
+                            else 
+                                GuestAbility.new
+                            end
+    end
+    
   
     # Define abilities for the passed in user here. For example:
     #

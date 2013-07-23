@@ -13,6 +13,9 @@
     <li>
     <%= link_to 'Edit account', edit_student_registration_path %>
     </li>
+    <li>
+    <%= link_to current_student.name, student_path(current_student.id) %>
+  </li>
   <% else %>
     <li>
     <%= link_to 'Sign up', new_student_registration_path %>

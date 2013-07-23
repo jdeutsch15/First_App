@@ -1,6 +1,8 @@
 class Student < ActiveRecord::Base
   rolify
   after_create :default_role
+  make_voter
+  ROLES = %w[admin social_chair student]
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -9,9 +11,10 @@ class Student < ActiveRecord::Base
 has_one :profile
 belongs_to :house
 has_many :messages, dependent: :destroy
+has_and_belongs_to_many :roles, :join_table => :students_roles
  
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :gender, :email, :password, :password_confirmation, :remember_me, :house_id
+  attr_accessible :name, :gender, :email, :pledge_class, :password, :password_confirmation, :remember_me, :house_id, :role
 attr_accessible :role_ids, :as => :admin
 validates :name, :password, :password_confirmation, :email, :gender, presence: true
   validates :password, :password_confirmation, length: {in: 6..15}
@@ -26,7 +29,10 @@ def default_role
   self.roles << Role.where(:name => 'Student').first
 end
 def feed
-  Message.where("student_id = ?", id)
+  Message.findall
+end
+def role?(role)
+  return  !!self.roles.find_by_name(role.to_s.camelize)
 end
 
 end

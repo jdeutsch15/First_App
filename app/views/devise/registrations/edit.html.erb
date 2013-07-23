@@ -7,7 +7,10 @@
 
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>
-
+<br/>
+ <div><%= f.label :role %><br />
+  <div><%= f.collection_select :role, Student::ROLES, :to_s, :humanize %></div>
+  <br/>
   <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
   <%= f.password_field :password, :autocomplete => "off" %></div>
 
