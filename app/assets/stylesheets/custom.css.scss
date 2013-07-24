@@ -1,0 +1,165 @@
+@import "bootstrap";
+
+#main{
+padding-top:10px;
+}
+
+.form
+{
+line-height:0%;
+}
+.eventlinks
+{text-align:left;}
+
+.links 
+{text-align:right;}
+
+header
+{background-color:orange;
+padding-left:10px;
+padding-right:10px;
+padding-bottom:0px;
+border-bottom:thick solid black;
+
+}
+
+#title{font-size:250%;
+font-weight:bold;
+color:blue;
+text-align:center;
+padding:25px;
+}
+
+.signin{
+  width: 250px;
+  display: block;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:20%;
+  margin-bottom:20%;
+  border-style:solid;
+border-width:20px;
+border-color:blue;
+
+}
+#invite
+{
+font-weight:bold;
+}
+
+#messageboard
+{
+background-color:orange;
+font-size:250%;
+font-weight:bold;
+color:blue;
+text-align:right;
+
+}
+
+#messagesheader{
+  text-align:center;
+  font-weight:bold;
+  font-size:40px;
+  padding-bottom:30px;
+}
+
+#messagebox{
+  text-align:center;
+}
+
+#housename{
+font-weight:bold;
+text-align:center;
+font-size:40px;
+}
+
+#housetype{
+text-align:right;
+font-size:15px;
+}
+
+.messages
+{
+border:solid 1px black; 
+
+color:black;
+padding:4px;
+text-align:left;
+}
+.title{font-weight:bold;
+font-size:150%;
+}
+table {
+  font: 100% sans-serif;
+  background-color: orange;
+  border-collapse: collapse;
+  empty-cells:show;
+  border: 1px solid black;
+}
+
+table > caption {
+  text-align: left;
+  font-weight: bold;
+  font-size: 200%;
+  border-bottom: .2em solid #4ca;
+  margin-bottom: .5em;
+}
+
+
+/* basic shared rules */
+table th,
+table td {
+  text-align: center;
+  padding-right: .5em;
+}
+
+table th {
+  font-weight: bold;
+  padding-left: .5em;
+}
+
+
+/* header */
+table > thead > tr:first-child > th {
+  text-align:left;
+  color: blue;
+}
+
+table > thead > tr + tr > th {
+  font-style: italic;
+  color: gray;
+}
+
+/* fix size of superscript */
+table sup {
+  font-size: 75%;
+}
+
+/* body */
+table td {
+  background-color: #def;
+  padding:2em 5em 1em 2em;
+}
+
+
+
+/* footer */
+table tfoot {
+  font-weight: bold;
+}
+
+table tfoot th {
+  color: blue;
+}
+
+
+
+table > tfoot td {
+  background-color: #cee;
+}
+
+table > tfoot > tr:first-child td {
+  border-top: .2em solid #7a7;
+}
+

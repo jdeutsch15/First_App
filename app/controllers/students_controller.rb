@@ -10,9 +10,13 @@ class StudentsController < ApplicationController
   end
 
 end
-  def show
-
-  	@student=Student.find(params[:id])
+ def show
+if params[:id].nil? 
+    @student = current_student
+else 
+    @student = Student.find params[:id]
+end
+  	
   	@messages=@student.messages.paginate(page: params[:page])
   	
   	respond_to do |format|

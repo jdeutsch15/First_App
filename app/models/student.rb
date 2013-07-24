@@ -2,7 +2,7 @@ class Student < ActiveRecord::Base
   rolify
   after_create :default_role
   make_voter
-  ROLES = %w[admin social_chair student]
+  ROLES = ['Student', 'Social Chair']
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable

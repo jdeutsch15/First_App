@@ -13,11 +13,14 @@
 
 <% @houses.each do |house| %>
   <tr>
-    <td><%= house.name %></td>
+    <td><%= link_to house.name, house %></td>
     <td><%= house.house_type %></td>
-    <td><%= link_to 'Show', house %></td>
+    <div class="links">
+   
+    <% if current_student.role=="admin" then%>
     <td><%= link_to 'Edit', edit_house_path(house) %></td>
-    <td><%= link_to 'Destroy', house, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Destroy', house, method: :delete, data: { confirm: 'Are you sure?' } %></td></div>
+    <%end%>
   </tr>
 <% end %>
 <% end %>

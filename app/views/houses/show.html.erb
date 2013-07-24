@@ -1,15 +1,18 @@
   <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
+
+	<p>
+<div id="housename">
   <%= @house.name %>
+  </div>
 </p>
 
 
 
 <p>
-  <b>House Type:</b>
+<div id="housetype">
   <%= @house.house_type %>
+</div>
 </p>
 
 <br>
@@ -35,7 +38,7 @@
 		<td><%= student.email%></td>
 		<td><%= student.gender%></td>
 		<td><%= student.pledge_class%></td>
-		<td><%= link_to 'View Person', student_path(student) %></td>
+		 <div class="links"><td><%= link_to 'View Person', student_path(student) %></td></div>
 	</tr>
 	<%end%>
 	<% end %>
@@ -59,7 +62,7 @@
 		<td><%= student.email%></td>
 		<td><%= student.gender%></td>
 		<td><%= student.pledge_class%></td>
-		<td><%= link_to 'View Person', student_path(student) %></td>
+		 <div class="links"><td><%= link_to 'View Person', student_path(student) %></td></div>
 	</tr>
 	<% end %>
 	<% end %>
@@ -83,7 +86,7 @@
 		<td><%= student.email%></td>
 		<td><%= student.gender%></td>
 		<td><%= student.pledge_class%></td>
-		<td><%= link_to 'View Person', student_path(student) %></td>
+		 <div class="links"><td><%= link_to 'View Person', student_path(student) %></td></div>
 	</tr>
 	<% end %>
 	<% end %>
@@ -107,7 +110,7 @@
 		<td><%= student.email%></td>
 		<td><%= student.gender%></td>
 		<td><%= student.pledge_class%></td>
-		<td><%= link_to 'View Person', student_path(student) %></td>
+		 <div class="links"><td><%= link_to 'View Person', student_path(student) %></td></div>
 	</tr>
 	<% end %>
 	<% end %>
@@ -131,7 +134,7 @@
 		<td><%= student.email%></td>
 		<td><%= student.gender%></td>
 		<td><%= student.pledge_class%></td>
-		<td><%= link_to 'View Person', student_path(student) %></td>
+		 <div class="links"><td><%= link_to 'View Person', student_path(student) %></td></div>
 	</tr>
 	<% end %>
 	<% end %>
@@ -150,33 +153,38 @@
 	</tr>
 	<% @house.invitations.each do |invitation| %>
 	<tr>
-		<td><%= link_to invitation.event.name, invitation.event%></td>
+		 <div class="links"><td><%= link_to invitation.event.name, invitation.event%></td></div>
 		<td><%= invitation.response%></td>
 		
-		<td><%= link_to 'View Invitation', invitation_path(invitation) %></td>
+		 <div class="links"><td><%= link_to 'View Invitation', invitation_path(invitation) %></td></div>
 		<%if current_student.role == "social_chair" then %>
 		<td><%= form_for invitation, :remote => true do |f|%>
 			<%= f.label :response, "Response"%><br/>
 			<%=f.select :response, ["Yes", "No"]%>
 			<%=f.submit "Respond to invite"%>
-			<%end%><%end%></td>
+			
+			<%end%>
+			<%end%>
+		</td>
 	</tr>
+	<%end%>
 	
-	<% end %>
 	<%end%>
 </table>
+
 <br>
 <br>
 <table id="events">
 	<th>Event Information</th>
 	
 	<%= calendar @house.events do |event| %>
-  <div> <%=link_to event.name, event %></div>
-  <div><%= event.start_time%></div>
+   <div class="eventlinks"><div> <%=link_to event.name, event %></div></div>
+  <div><%= event.start_time.time.to_s(:time)  %></div>
 <% end %>
 	</table>
 	<% if current_student.house==@house then %>
 	<% if current_student.role=="social_chair" then%>
+	<div class="form">
 	<%= form_for Event.new, :remote => true do|f| %>
 		<%=f.label :name, "Name" %><br />
 		<%=f.text_field :name, :id => "name" %><br />
@@ -184,22 +192,25 @@
 		<%=f.text_field :location, :id => "location" %><br />
 		<%=f.label :description, "Description" %><br />
 		<%=f.text_field :description, :id => "description"%><br />
-		<%=f.label :start_time, "Date Time"%><br />
-		<%=f.datetime_select :start_time %><br />
+		<%=f.label :start_time, "Date"%><br />
+		<%=f.date_select :start_time %><br />
+		<%=f.label :start_time, "Time"%><br />
+		<%=f.time_select :start_time, :ignore_date => true %><br />
 		<%=f.label :event_type, "Type" %><br />
 		<%=f.select :event_type, ["Pregame", "Exchange", "Philanthropy"]%><br />
 		<%= f.hidden_field :house_id, :value => @house.id %><br />
+	
 		<br>
 		<%= f.submit "Add Event" %>
 	<%end%>
+</div>
 	<%end%>
 	<%end%>
-	<div id="javascript">
-	</div>
+
 	<br>		
 	<br>
 	<br>
-	<p><%= link_to "message board", messages_path %></p>
+	
 	<%= link_to 'Back', houses_path %>
 
 <script>

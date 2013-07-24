@@ -1,43 +1,49 @@
-<h3>Student</h3>
+<h3><%=@student.role%></h3>
 <p><b>Name:</b> <%= @student.name %></p>
 <p><b>Email:</b> <%= @student.email%></p>
 <p><b>Gender:</b> <%= @student.gender %></p>
+<p><b>Pledge Class:</b> <%= @student.pledge_class %></p>
 <p><b>House:</b> <%= link_to @student.house.name, @student.house %></p>
-	<p><b>Events:</b></p>
+	<p><b>Upcoming Events:</b></p>
 	<% @student.house.events.each do |event| %>
+	<%if event.start_time.mon==Time.now.mon then%>
 	<p><%= link_to event.name, event%></p>
+	<%end%>
 	<%end%>
 <br>
 <br>
 <br>
+<b>Profile</b>
+<% if @student.profile %>
 <table id="profile">
-	<th>Profile</th>
 	<tr>
 		<th>Birthday</th>
 		<th>Interests</th>
 		<th>Phone</th>
 		<th>Relationship Status</th>
-		<%= button_to "Update", {:controller => 'profiles', :id => @student.id}, remote: true%>
+		
 	</tr>
-	<% if @student.profile %>
+
 	<tr>
+	
 		<td><%= @student.profile.birthday %></td>
 		<td><%= @student.profile.interests %></td>
 		<td><%= @student.profile.phone %></td>
 		<td><%= @student.profile.relationship_status %></td>
+		<td><%=link_to "Edit", edit_profile_path(@student.profile)%></td>
 		
-	</tr>
-	<% else %>
-		<tr>
-			<td><input type ="button" value = "update" onclick="var e = document.createElement('input'); e.type= 'text';"></td>
-	<% end %>
 	
-</table>
+	</tr>
+	</table>
+	<%else%>
+</br></br><%=button_to "Create", new_profile_path%>
+<%end%>
 <br>
 <br>
 <br>
-<div class="student messages">
+
 	<%if @student.messages.any? %>
+	<div class="student messages">
 	<h3>Messages (<%= @student.messages.count%>) </h3>
 	<ol class="messages">
 		<%= render @messages %>
@@ -46,8 +52,5 @@
 	<%end%>
 </div>
 
-<p><%= link_to "message board", messages_path %></p>
 
 
-<%= link_to 'Edit', edit_student_path(@student) %>
-<%= link_to 'Back', students_path %>

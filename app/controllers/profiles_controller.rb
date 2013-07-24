@@ -25,8 +25,8 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   # GET /profiles/new.json
   def new
-    @profile = Profile.new
-    @profile.person_id=params[:person_id]
+    @profile = Profile.new(params[:profile])
+    @profile.student_id=params[:student_id]
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @profile }

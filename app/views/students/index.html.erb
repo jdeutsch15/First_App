@@ -23,13 +23,13 @@
 			<td><%=student.roles.first.name.titleize unless student.roles.first.nil?%></td>
 			
         </td>
-			<td><%=link_to 'Show', student%> </td>
+			 <div class="links"><td><%=link_to 'Show', student%> </td>
 			<td><%= link_to 'Edit', edit_student_path(student) %></td>
-			<td><%= link_to 'Destroy', student, method: :delete, data: {confirm: 'Are You Sure>'} unless student ==current_student %></td>
+			<td><%= link_to 'Destroy', student, method: :delete, data: {confirm: 'Are You Sure>'} unless student ==current_student %></td></div>
 		</tr>
 		<% end %>
 		<% end %>
 	</table>
 	<br />
 	<br />
-	<p><%= link_to "message board", messages_path %></p>
+

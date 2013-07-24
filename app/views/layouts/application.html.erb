@@ -14,11 +14,15 @@
       <header>
         <%= render 'layouts/navigation' %>
         <%= render 'layouts/messages' %>
+        <div id="messageboard"><p><%= link_to "message board", messages_path %>    &nbsp&nbsp&nbsp<%= link_to "houses", houses_path %></p></div>
+        <div id="title">GREEKILLINI</div>
       </header>
       <div id="main" role="main">
         <%= yield %>
       </div>
+
       <footer>
+
       </footer>
     </div> <!--! end of #container -->
   </body>

@@ -6,7 +6,7 @@ FirstApp::Application.routes.draw do
   get "students/show"
 
  authenticated :student do 
-  root :to => "students#index"
+  root :to => "students#show"
 end
 root :to => "students#index"
 devise_for :students

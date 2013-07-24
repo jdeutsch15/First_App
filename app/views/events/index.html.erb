@@ -1,17 +1,6 @@
 <h1>Listing events</h1>
 <%if (@events) then%>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Location</th>
-    <th>Description</th>
-    <th>Event Type</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
 <%= calendar @events do |event| %>
   <div> <%=link_to event.name, event %></div>
 <% end %>

@@ -1,9 +1,13 @@
 
 <li>
-  <span class="content"><%= message.content %></span>
+	<div class="messages">
+  <span class="content"><%= message.content %></span></br>
   <span class="timestamp">
-    Posted <%= time_ago_in_words(message.created_at) %> ago.
+    Posted by <%=message.student.name%> <%=time_ago_in_words(message.created_at) %> ago.
   </span>
-  	 <%=link_to "message", message %>
-    <%= link_to "delete", message, method: :delete, data: {confirm: "Are You Sure?"}%>
+  	 <div class="links"> <%=link_to "message", message %>
+  	 	<% if message.student==current_student then%>
+    <%= link_to "delete", message, method: :delete, data: {confirm: "Are You Sure?"}%></div>
+    <%end%>
+</div>
 </li>

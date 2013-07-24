@@ -20,9 +20,7 @@
 
 <table id="houses_attending">
 	<th>Houses Attending</th>
-	<tr>
-		<th>Name</th>
-	</tr>
+	
 	<% @event.houses.each do |house| %>
 	<tr>
 		<td><%= link_to house.name, house %></td>
@@ -33,7 +31,7 @@
 <%if current_student.role=="social_chair" then %>
 <% if @event.host_id == current_student.house_id%>
 	<%= form_for Invitation.new, :remote => :true do |f| %>
-	<b><%= f.label :house_id, "Invite House" %></b><br />
+	<%= f.label :house_id, "Invite House" %> <br />
 		<%= f.select :house_id, options_from_collection_for_select(House.all, :id, :name) %><br />
 		<%= f.hidden_field :event_id, :value => @event.id%><br />
 		<%=f.submit "Invite House To Event" %>
@@ -45,6 +43,3 @@
 <br/>
 
 
-
-
-<p><%= link_to "message board", messages_path %></p>
