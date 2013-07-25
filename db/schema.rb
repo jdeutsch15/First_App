@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130723202610) do
+ActiveRecord::Schema.define(:version => 20130725202401) do
+
+  create_table "event_notes", :force => true do |t|
+    t.string   "content"
+    t.integer  "student_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "event_id"
+  end
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -61,11 +69,11 @@ ActiveRecord::Schema.define(:version => 20130723202610) do
   create_table "profiles", :force => true do |t|
     t.string   "interests"
     t.string   "relationship_status"
-    t.string   "birthday"
     t.string   "phone"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.integer  "student_id"
+    t.date     "birthday"
   end
 
   create_table "roles", :force => true do |t|

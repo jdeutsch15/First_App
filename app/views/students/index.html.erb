@@ -9,15 +9,14 @@
 	<table>
 		<tr>
 			<th>Name</th>
-			<th>Gender</th>
+	
 			<th>Email</th>
 			<th>Registered</th>
 			<th>Role</th>
 		</tr>
 		<% @students.each do |student| %>
 		<tr>
-			<td><%=link_to "#{student.name}", student %></td>
-			<td><%=student.gender%></td>
+			<td><%=link_to "#{student.capitalize_name}", student %></td>
 			<td><%=student.email%></td>
 			<td><%=student.created_at.to_date%></td>
 			<td><%=student.roles.first.name.titleize unless student.roles.first.nil?%></td>

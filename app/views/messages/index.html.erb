@@ -10,8 +10,11 @@
   <%= f.submit "Post", class: "btn btn-large btn-primary" %>
 <% end %>
 </div>
+<div id="javascript"></div><br/>
 <div class="studentmessages">
-	<ol id="messages">
+	<ol class="messages">
 		<%= render @messages %>
-	</ol>
 
+	</ol>
+	<%=will_paginate @messages%>
+</div>

@@ -1,0 +1,11 @@
+<h3>event_note</h3>
+<p><b>Content:</b> <%= @event_note.content %></p>
+<p><b>Posted by:</b> <%= @event_note.student.capitalize_name %></p>
+<p><b>Posted at:</b> <%= @event_note.created_at.to_formatted_s(:long_ordinal)  %></p>
+ <div class="links">
+<p><%= link_to @event_note.student.capitalize_name, @event_note.student%></p>
+<p><%= link_to @event_note.student.house.name, @event_note.student.house%></p>
+<%if @event_note.student==current_student then %>
+<p><%= link_to "delete", @event_note, method: :delete, data: {confirm: "Are You Sure?"}%><p>
+	<%end%>
+</div>

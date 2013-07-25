@@ -11,6 +11,7 @@ class Student < ActiveRecord::Base
 has_one :profile
 belongs_to :house
 has_many :messages, dependent: :destroy
+has_many :event_notes, dependent: :destroy
 has_and_belongs_to_many :roles, :join_table => :students_roles
  
   # Setup accessible (or protected) attributes for your model
@@ -34,5 +35,7 @@ end
 def role?(role)
   return  !!self.roles.find_by_name(role.to_s.camelize)
 end
-
+ def capitalize_name
+    "#{name.titleize}"
+  end
 end

@@ -1,10 +1,10 @@
-<h3><%=@student.role%></h3>
-<p><b>Name:</b> <%= @student.name %></p>
+<h3><%= @student.capitalize_name %></h3>
+<p><b>Role:</b> <%=@student.role%></p>
 <p><b>Email:</b> <%= @student.email%></p>
-<p><b>Gender:</b> <%= @student.gender %></p>
-<p><b>Pledge Class:</b> <%= @student.pledge_class %></p>
 <p><b>House:</b> <%= link_to @student.house.name, @student.house %></p>
-	<p><b>Upcoming Events:</b></p>
+
+<p><b>Pledge Class:</b> <%= @student.pledge_class %></p>
+	<p><b>Events This Month:</b></p>
 	<% @student.house.events.each do |event| %>
 	<%if event.start_time.mon==Time.now.mon then%>
 	<p><%= link_to event.name, event%></p>
@@ -13,11 +13,14 @@
 <br>
 <br>
 <br>
-<b>Profile</b>
+
 <% if @student.profile %>
+<b>Profile</b>
 <table id="profile">
 	<tr>
+		<%if @student.profile.birthday then%>
 		<th>Birthday</th>
+		<%end%>
 		<th>Interests</th>
 		<th>Phone</th>
 		<th>Relationship Status</th>
@@ -25,18 +28,22 @@
 	</tr>
 
 	<tr>
-	
-		<td><%= @student.profile.birthday %></td>
+	<%if @student.profile.birthday then%>
+		<td><%= @student.profile.birthday.to_formatted_s(:long_ordinal) %></td><%end%>
 		<td><%= @student.profile.interests %></td>
 		<td><%= @student.profile.phone %></td>
 		<td><%= @student.profile.relationship_status %></td>
+		<%if current_student.id==@student.id then %>
 		<td><%=link_to "Edit", edit_profile_path(@student.profile)%></td>
-		
+		<%end%>
 	
 	</tr>
 	</table>
 	<%else%>
-</br></br><%=button_to "Create", new_profile_path%>
+	<%if current_student.id==@student.id then %>
+	<b>Profile Empty</b>
+</br></br><%=button_to "Create Profile", new_profile_path, :method => :get%>
+<%end%>
 <%end%>
 <br>
 <br>
@@ -44,7 +51,7 @@
 
 	<%if @student.messages.any? %>
 	<div class="student messages">
-	<h3>Messages (<%= @student.messages.count%>) </h3>
+	<h3><%=@student.capitalize_name%>'s Messages (<%= @student.messages.count%>) </h3>
 	<ol class="messages">
 		<%= render @messages %>
 	</ol>

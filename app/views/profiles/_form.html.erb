@@ -17,19 +17,18 @@
   </div>
   <div class="field">
     <%= f.label :relationship_status %><br />
-    <%= f.text_field :relationship_status %>
+    <%= f.select :relationship_status, ["Single", "In A Relationship", "Married"] %>
   </div>
   <div class="field">
     <%= f.label :birthday %><br />
-    <%= f.text_field :birthday %>
+    <%= f.date_select :birthday, start_year: 1990, :use_month_numbers => true, :use_two_digit_numbers => true, order: [:month, :day, :year],prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }  %>
   </div>
   <div class="field">
     <%= f.label :phone %><br />
     <%= f.text_field :phone %>
   </div>
   <div class="field">
-    <%= f.label :student_id %><br />
-    <%= f.text_field :student_id %>
+    <%= f.hidden_field :student_id, :value=> current_student.id%>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -14,7 +14,7 @@
     <%= link_to 'Edit account', edit_student_registration_path %>
     </li>
     <li>
-    <%= link_to current_student.name, student_path(current_student.id) %>
+    <%= link_to current_student.capitalize_name, student_path(current_student.id) %>
   </li>
   <% else %>
     <li>

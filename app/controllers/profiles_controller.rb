@@ -36,6 +36,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/1/edit
   def edit
     @profile = Profile.find(params[:id])
+
   end
 
   # POST /profiles
@@ -45,7 +46,7 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.save!
-        format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
+        format.html { redirect_to current_student, notice: 'Profile was successfully created.' }
         format.js
       else
         format.html { render action: "new" }
@@ -58,10 +59,11 @@ class ProfilesController < ApplicationController
   # PUT /profiles/1.json
   def update
     @profile = Profile.find(params[:id])
-
+    
+   # @profile = Profile.update(params[:id], params[:profile])
     respond_to do |format|
-      if @profile.save!
-        format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
+      if @profile.update_attributes(params[:profile])
+        format.html { redirect_to current_student, notice: 'Profile was successfully updated.' }
         format.js
       else
         format.html { render action: "edit" }

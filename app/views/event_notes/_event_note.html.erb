@@ -1,0 +1,13 @@
+
+<li>
+	<div class="event_notes">
+  <span class="content"><%= event_note.content %></span></br>
+  <span class="timestamp">
+    Posted by <%=event_note.student.capitalize_name%> <%=time_ago_in_words(event_note.created_at) %> ago.
+  </span>
+  	 <div class="links"> <%=link_to "event_note", event_note %>
+  	 	<% if event_note.student==current_student then%>
+    <%= link_to "delete", event_note, method: :delete, data: {confirm: "Are You Sure?"}%></div>
+    <%end%>
+</div>
+</li>

@@ -42,4 +42,32 @@
 <br/>
 <br/>
 
+<div id="event_note_header">
+	Event Message Board
+</div>
+<div id="eventmessagebox">
+<%= form_for EventNote.new, :remote => true do|f| %>
+  <div class="field">
+    <%= f.text_area :content, :id => "text", placeholder: "Compose new message..." %>
+  </div>
+  <%= f.hidden_field :event_id, :value => @event.id %>
+  <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+<% end %>
+</div>
 
+	<% @event.event_notes.each do |event_note| %>
+	
+	<li>
+	<div class="event_notes">
+  <span class="content"><%= event_note.content %></span></br>
+  <span class="timestamp">
+    Posted by <%=event_note.student.capitalize_name%> <%=time_ago_in_words(event_note.created_at) %> ago.
+  </span>
+  	 <div class="links"> <%=link_to "Message", event_note %>
+  	 	<% if event_note.student==current_student then%>
+    <%= link_to "Delete", event_note, method: :delete, data: {confirm: "Are You Sure?"}%></div>
+    <%end%>
+</div>
+
+</ol>
+	<%end%>

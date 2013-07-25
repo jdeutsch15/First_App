@@ -3,7 +3,7 @@
 	<div class="messages">
   <span class="content"><%= message.content %></span></br>
   <span class="timestamp">
-    Posted by <%=message.student.name%> <%=time_ago_in_words(message.created_at) %> ago.
+    Posted by <%=message.student.capitalize_name%> <%=time_ago_in_words(message.created_at) %> ago.
   </span>
   	 <div class="links"> <%=link_to "message", message %>
   	 	<% if message.student==current_student then%>

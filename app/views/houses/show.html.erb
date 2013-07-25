@@ -34,7 +34,7 @@
 	<% @house.students.each do |student| %>
 	<% if student.pledge_class=="2013" then %>
 	<tr>
-		<td><%= student.name%></td>
+		<td><%= student.capitalize_name%></td>
 		<td><%= student.email%></td>
 		<td><%= student.gender%></td>
 		<td><%= student.pledge_class%></td>
@@ -58,7 +58,7 @@
 	<% @house.students.each do |student| %>
 	<% if student.pledge_class=="2014" then %>
 	<tr>
-		<td><%= student.name%></td>
+		<td><%= student.capitalize_name%></td>
 		<td><%= student.email%></td>
 		<td><%= student.gender%></td>
 		<td><%= student.pledge_class%></td>
@@ -82,7 +82,7 @@
 	<% @house.students.each do |student| %>
 	<% if student.pledge_class=="2015" then %>
 	<tr>
-		<td><%= student.name%></td>
+		<td><%= student.capitalize_name%></td>
 		<td><%= student.email%></td>
 		<td><%= student.gender%></td>
 		<td><%= student.pledge_class%></td>
@@ -106,11 +106,11 @@
 	<% @house.students.each do |student| %>
 	<% if student.pledge_class=="2016" then %>
 	<tr>
-		<td><%= student.name%></td>
+		 <div class="links"><td><%= link_to student.capitalize_name, student_path(student) %></td></div>
 		<td><%= student.email%></td>
 		<td><%= student.gender%></td>
 		<td><%= student.pledge_class%></td>
-		 <div class="links"><td><%= link_to 'View Person', student_path(student) %></td></div>
+		
 	</tr>
 	<% end %>
 	<% end %>
@@ -130,7 +130,7 @@
 	<% @house.students.each do |student| %>
 	<% if student.pledge_class=="2017" then %>
 	<tr>
-		<td><%= student.name%></td>
+		<td><%= student.capitalize_name%></td>
 		<td><%= student.email%></td>
 		<td><%= student.gender%></td>
 		<td><%= student.pledge_class%></td>
@@ -178,9 +178,14 @@
 	<th>Event Information</th>
 	
 	<%= calendar @house.events do |event| %>
+	<%if @house==current_student.house then%>
    <div class="eventlinks"><div> <%=link_to event.name, event %></div></div>
-  <div><%= event.start_time.time.to_s(:time)  %></div>
-<% end %>
+  <div><%= event.start_time.time.to_s(:time) %></div>
+<%else%>
+ <div class="eventlinks"><div> Unavailable</div></div>
+  <div><%= event.start_time.time.to_s(:time)   %></div>
+<%end%>
+<%end%>
 	</table>
 	<% if current_student.house==@house then %>
 	<% if current_student.role=="social_chair" then%>
@@ -211,7 +216,7 @@
 	<br>
 	<br>
 	
-	<%= link_to 'Back', houses_path %>
+
 
 <script>
   $(function() {

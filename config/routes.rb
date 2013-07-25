@@ -13,6 +13,7 @@ devise_for :students
 resources :students
 resources :houses
 resources :profiles
+resources :event_notes
 resources :events
 resources :messages
 resources :message_boards

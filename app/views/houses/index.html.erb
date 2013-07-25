@@ -12,11 +12,21 @@
   </tr>
 
 <% @houses.each do |house| %>
+<%if house.house_type=="Fraternity" then %>
   <tr>
     <td><%= link_to house.name, house %></td>
     <td><%= house.house_type %></td>
     <div class="links">
-   
+   <%end%>
+ </tr>
+ <%end%>
+   <% @houses.each do |house| %>
+<%if house.house_type=="Sorority" then %>
+  <tr>
+    <td><%= link_to house.name, house %></td>
+    <td><%= house.house_type %></td>
+    <div class="links">
+   <%end%>
     <% if current_student.role=="admin" then%>
     <td><%= link_to 'Edit', edit_house_path(house) %></td>
     <td><%= link_to 'Destroy', house, method: :delete, data: { confirm: 'Are you sure?' } %></td></div>
