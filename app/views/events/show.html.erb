@@ -1,5 +1,25 @@
-<p id="notice"><%= notice%></p>
 
+<p id="notice"><%= notice%></p>
+<%if @event.houses.where(:id => current_student.house_id).present? then%>
+<%=javascript_include_tag 'rating_ballot'%>
+<%if @event.start_time<Time.now then%>
+<p><b>Rate This Event:</b></p>
+<%=form_for(rating_ballot, :remote => true, :html => {:class => 'rating_ballot'}) do |f|%>
+<%=f.label("value_1", content_tag(:span, '1'), {:class => "rating", :id=>"1"})%>
+<%=radio_button_tag("rating[value]", 1, current_student_rating == 1, :class => 'rating_button')%>
+<%=f.label("value_2", content_tag(:span, '2'), {:class => "rating", :id=>"2"})%>
+<%=radio_button_tag("rating[value]", 2, current_student_rating == 2, :class => 'rating_button')%>
+<%=f.label("value_3", content_tag(:span, '3'), {:class => "rating", :id=>"3"})%>
+<%=radio_button_tag("rating[value]", 3, current_student_rating == 3, :class => 'rating_button')%>
+<%=f.label("value_4", content_tag(:span, '4'), {:class => "rating", :id=>"4"})%>
+<%=radio_button_tag("rating[value]", 4, current_student_rating == 4, :class => 'rating_button')%>
+<%=f.label("value_5", content_tag(:span, '5'), {:class => "rating", :id=>"5"})%>
+<%=radio_button_tag("rating[value]", 5, current_student_rating == 5, :class => 'rating_button')%></br></br>
+<%=hidden_field_tag("event_id", @event.id)%>
+
+<%end%>
+<%=render 'rating'%>
+<%end%>
 <p>
 	<b>Name:</b>
 	<%= @event.name %>
@@ -28,8 +48,8 @@
 	<%end%>
 </table>
 <br/>
-<%if current_student.role=="social_chair" then %>
-<% if @event.host_id == current_student.house_id%>
+<%if current_student.role=="Social Chair" then %>
+<% if @event.host_id == current_student.house_id then%>
 	<%= form_for Invitation.new, :remote => :true do |f| %>
 	<%= f.label :house_id, "Invite House" %> <br />
 		<%= f.select :house_id, options_from_collection_for_select(House.all, :id, :name) %><br />
@@ -54,11 +74,12 @@
   <%= f.submit "Post", class: "btn btn-large btn-primary" %>
 <% end %>
 </div>
-
-	<% @event.event_notes.each do |event_note| %>
 	
+<ol>
+	<% @event.event_notes.each do |event_note| %>
+	<div id="eventnotes">
 	<li>
-	<div class="event_notes">
+	
   <span class="content"><%= event_note.content %></span></br>
   <span class="timestamp">
     Posted by <%=event_note.student.capitalize_name%> <%=time_ago_in_words(event_note.created_at) %> ago.
@@ -66,8 +87,13 @@
   	 <div class="links"> <%=link_to "Message", event_note %>
   	 	<% if event_note.student==current_student then%>
     <%= link_to "Delete", event_note, method: :delete, data: {confirm: "Are You Sure?"}%></div>
-    <%end%>
-</div>
 
-</ol>
+
+    <%end%>
+   </div>
+</li>
 	<%end%>
+</ol>
+<%else%>
+<b>You Can't View This Event!<b/>
+<%end%>

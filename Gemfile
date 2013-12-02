@@ -13,10 +13,13 @@ gem 'cancan', '>=1.6.8'
 gem 'rolify', '>=3.2.0'
 gem 'simple_calendar', '~> 0.1.9'
 gem 'make_voteable'
-
+gem 'sqlite3', '1.3.7'
+gem 'ajaxful_rating', :git => 'git://github.com/edgarjs/ajaxful-rating.git', :branch => "rails3"
 group :development, :test do
   gem 'sqlite3', '1.3.7'
   gem 'rspec-rails', '2.11.0'
+  gem 'pg'
+  gem 'letsrate'
 end
 
 
@@ -35,5 +38,5 @@ group :test do
 
 end
 group :production do
-  gem 'pg', '0.12.2'
+  gem 'pg'
 end

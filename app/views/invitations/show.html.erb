@@ -15,7 +15,7 @@
   Please Respond
   <%end%>
 </p>
-<%if current_student.role=="social_chair" then %>
+<%if current_student.role=="Social Chair" then %>
 <% if current_student.house_id == @invitation.house_id then %>
   <%=form_for @invitation, :remote => true do|f|%>
   <%=f.select :response, ["Yes", "No"] %><br/>

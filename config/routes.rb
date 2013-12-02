@@ -1,6 +1,8 @@
 FirstApp::Application.routes.draw do
  
 
+  match '/rate' => 'rater#create', :as => 'rate'
+
   get "students/index"
 
   get "students/show"
@@ -14,7 +16,12 @@ resources :students
 resources :houses
 resources :profiles
 resources :event_notes
-resources :events
+resources :ratings
+resources :events do
+  member do
+    post :rate
+  end
+end
 resources :messages
 resources :message_boards
 resources :invitations do
@@ -24,6 +31,7 @@ resources :invitations do
     get 'not_attending'
     post 'not_attending'
   end
+
 end
 
 

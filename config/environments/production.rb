@@ -1,6 +1,19 @@
 FirstApp::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
+config.action_mailer.default_url_options = { :host => 'greekillini.com' }
 
+config.action_mailer.smtp_settings = {
+  :address   => "smtp.mandrillapp.com",
+  :port      => 587,
+  :user_name => ENV["jdeutsch15@gmail.com"],
+  :password  => ENV["g5ylSQWm1CHr5PmBrqR4Wg"]
+}
+# ActionMailer Config
+# Setup for production - deliveries, no errors raised
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.perform_deliveries = true
+config.action_mailer.raise_delivery_errors = false
+config.action_mailer.default :charset => "utf-8"
   # Code is not reloaded between requests
   config.cache_classes = true
 

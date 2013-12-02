@@ -18,7 +18,7 @@ before_filter :authenticate_student!
     
     respond_to do |format|
       format.html # show.html.erb
-      format.js
+      format.json {redirect_to :back}
     end
   end
 

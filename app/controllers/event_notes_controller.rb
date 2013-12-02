@@ -34,8 +34,8 @@ end
         format.html { render action: "new" }
         format.js
       else
-        format.html { redirect_to @event_note , notice: 'event_note was successfully created.' }
-        format.js
+        format.html { redirect_to :back , notice: 'event_note was successfully created.' }
+        format.js 
        end
       
     end
@@ -55,7 +55,7 @@ end
 def destroy 
 	@event_note=EventNote.find(params[:id])
 	@event_note.destroy
-	redirect_to event_notes_path
+	redirect_to :back
 	end
 
 end

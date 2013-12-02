@@ -35,13 +35,13 @@ def create
     logger.info "house id is #{params[:invitation][:house_id].inspect}"
     @invitation.house_id=params[:invitation][:house_id]
     @invitation.event_id=params[:invitation][:event_id]
-    unless Invitation.where(:house_id => params[:invitation][:house_id], :event_id => params[:invitation][:event_id]) then
+    
     @invitation.save!
-  	end
+  	
     respond_to do |format|
       if @invitation.id.nil?
         format.html { render action: "new" }
-        format.js
+        format.json
       else
          format.html { redirect_to @invitation, notice: 'invitation was successfully created.' }
         format.json
@@ -55,7 +55,7 @@ def create
     respond_to do |format|
     
       if @invitation.update_attributes(params[:invitation])
-        format.html { redirect_to @invitation, notice: 'invitation was successfully updated.' }
+        format.html { redirect_to :back, notice: 'invitation was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -68,6 +68,7 @@ if(@invitation.response=="No") then
   @invitation.event.houses.delete(House.find(@invitation.house_id))
 end
     end
+
   end
 def destroy
     @invitation = Invitation.find(params[:id])
@@ -80,12 +81,12 @@ def destroy
   end
   def attending
     @invitation = Invitation.find(params[:id])
-    current_student.up_vote(@invitation)
+    current_student.up_vote!(@invitation)
     redirect_to :back
 end
 def not_attending
   @invitation = Invitation.find(params[:id])
-    current_student.down_vote(@invitation)
+    current_student.down_vote!(@invitation)
     redirect_to :back
   end
 end

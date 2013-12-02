@@ -11,3 +11,5 @@ ADMIN_NAME: First User
 ADMIN_EMAIL: user@example.com
 ADMIN_PASSWORD: basketball
 ADMIN_GENDER: male
+MANDRILL_USERNAME: jdeutsch15@gmail.com
+MANDRILL_API_KEY: g5ylSQWm1CHr5PmBrqR4Wg

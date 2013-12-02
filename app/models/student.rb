@@ -1,4 +1,5 @@
 class Student < ActiveRecord::Base
+  letsrate_rater
   rolify
   after_create :default_role
   make_voter
@@ -10,6 +11,8 @@ class Student < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 has_one :profile
 belongs_to :house
+has_many :ratings
+has_many :rated_events, :through => :ratings, :source => :events
 has_many :messages, dependent: :destroy
 has_many :event_notes, dependent: :destroy
 has_and_belongs_to_many :roles, :join_table => :students_roles

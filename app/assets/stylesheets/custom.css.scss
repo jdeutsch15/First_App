@@ -1,11 +1,17 @@
 @import "bootstrap";
 
+
+
 #main{
 padding-top:10px;
 }
 
 #signin{
   text-align:center;
+}
+
+#homepage{
+  background-image:url("images/greekillini.jpg")
 }
 
 .signin{
@@ -183,3 +189,5 @@ table > tfoot > tr:first-child td {
   border-top: .2em solid #7a7;
 }
 
+form.rating_ballot input#rating_submit {display: none;}
+form.rating_ballot input.rating_button { display: none; }
